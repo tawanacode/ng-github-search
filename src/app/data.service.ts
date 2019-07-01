@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { IData} from './data';
 
@@ -19,9 +19,12 @@ export class DataService {
 
 	}
 
-	getData(query: string): Observable<IData[]>{
-		return this.http.get<IData[]>(`${this.githubReposUrl}${query}&${this.limit}`, api_key).pipe(
-			tap(data => console.log(`All: ${JSON.stringify(data)}`)),
+	search(term: string): Observable<IData[]>{
+    if(term === '') return of([]);
+
+		return this.http.get<IData[]>(`${this.githubReposUrl}${term}&${this.limit}`, api_key).pipe(
+      //map(response => response),
+			//tap(data => console.log(`All: ${JSON.stringify(data)}`)),
 			catchError(this.handleError)
 		)
 	}

@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
@@ -23,7 +23,7 @@ import { SingleItemPageComponent } from './single-item-page/single-item-page.com
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    TypeaheadModule.forRoot(),
+    NgbTypeaheadModule,
     BrowserAnimationsModule
   ],
   providers: [],
