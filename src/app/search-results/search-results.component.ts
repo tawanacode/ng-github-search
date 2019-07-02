@@ -12,6 +12,6 @@ export class SearchResultsComponent implements OnChanges {
   constructor(private data: DataService) { }
 
   ngOnChanges(): void {
-    this.data.setRepoData(this.searchResults);
+    console.log(this.searchResults);
   }
 }

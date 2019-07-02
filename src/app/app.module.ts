@@ -10,18 +10,21 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ChartsModule } from 'ng2-charts';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SingleItemPageComponent } from './single-item-page/single-item-page.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchFormComponent,
     SearchResultsComponent,
-    SingleItemPageComponent
+    SingleItemPageComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { SingleItemPageComponent } from './single-item-page/single-item-page.com
     AppRoutingModule,
     NgbTypeaheadModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

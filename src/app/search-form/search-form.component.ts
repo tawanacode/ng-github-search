@@ -26,7 +26,7 @@ export class SearchFormComponent implements OnInit {
 
   search = (text$: Observable<string>) =>
     text$.pipe(
-      debounceTime(10),
+      debounceTime(300),
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(term =>

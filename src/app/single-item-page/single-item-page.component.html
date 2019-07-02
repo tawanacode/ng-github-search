@@ -22,30 +22,33 @@
             {{ repoData.name }}</h1>
             <p><strong>Repo by {{ repoData.owner.login }}</strong></p>
         <p class="card-text">{{ repoData.description }}</p>
-        <h3 class="mx-3">
+        <div class="mx-3">
           <a [href]='repoData.html_url' class="btn btn-outline-dark" target="_blank" rel="noopener">
             <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true"></fa-icon> view repo on github
           </a>
-        </h3>
+        </div>
       </div>
       <div class="row">
-        <div class="col-md-3 col-sm-3 text-center">
+        <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
           <h2><strong> {{ repoData.stargazers_count }} </strong><br>
             <small>Stargazers</small></h2>
         </div>
-        <div class="col-md-3 col-sm-3 text-center">
+        <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
           <h2><strong>{{ repoData.forks_count }} </strong><br>
             <small>Forks</small></h2>
         </div>
-        <div class="col-md-3 col-sm-3 text-center">
+        <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
           <h2><strong>{{ repoData.open_issues }}</strong><br>
             <small>Open Issues</small></h2>
         </div>
-        <div class="col-md-3 col-sm-3 text-center">
+        <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
           <h2><strong>{{ repoData.subscribers_count }}</strong><br>
             <small>Subscribers</small></h2>
         </div>
       </div>
     </div>
+  </section>
+  <section>
+      <app-pie-chart></app-pie-chart>
   </section>
 </main>
