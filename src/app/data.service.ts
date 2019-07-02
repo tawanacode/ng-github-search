@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { IData } from './data';
@@ -11,7 +11,15 @@ import { IData } from './data';
 export class DataService {
   private githubReposUrl: string = 'https://api.github.com/search/repositories';
   private githubParams = new HttpParams();
+
+  private repoDataSubject = new BehaviorSubject([]);
+  currentData = this.repoDataSubject.asObservable();
+
   constructor(private http: HttpClient) {
+  }
+
+  setRepoData(obj: any) {
+    this.repoDataSubject.next(obj)
   }
 
   search(term: string) {

@@ -1,7 +1,29 @@
 <div class="card my-3" *ngFor='let data of searchResults'>
-    <div class="card-body">
-      <h3>{{ data?.name }}</h3>
-      <p>{{ data?.description }}</p>
-      <img [src]='data.owner.avatar_url' class="img-fluid rounded-circle w-25 float-left" [alt]='data.owner.login'>
+  <div class="card-body">
+    <div class="card-image">
+      <img [src]='data.owner.avatar_url' class="img-fluid rounded-circle" [alt]='data.owner.login'>
+    </div>
+    <div class="card-details mx-3">
+      <h3>{{ data.name }}</h3>
+      <p>{{ ( data.description.length > 20) ? ( data.description | slice:0:90)+'...':( data.description)}}</p>
+    </div>
+    <div class="card-btn">
+      <a [routerLink]="['/search-page', data.id]" class="btn btn-dark">more info</a>
     </div>
   </div>
+</div>
+
+<div class="card my-3">
+  <div class="card-body">
+    <div class="card-image">
+      <img class="img-fluid rounded-circle" src="https://avatars0.githubusercontent.com/u/2918581?v=4" alt="twbs">
+    </div>
+    <div class="card-details mx-3">
+      <h3>bootstrap</h3>
+      <p>The most popular HTML, CSS, and JavaScript framework for developing...</p>
+    </div>
+    <div class="card-btn">
+      <a class="btn btn-dark" >more&nbsp;info</a>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnChanges, Input } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-search-results',
@@ -8,10 +9,9 @@ import { Component, OnChanges, Input } from '@angular/core';
 export class SearchResultsComponent implements OnChanges {
   @Input() searchResults: any [];
 
-  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-    throw new Error("Method not implemented.");
+  constructor(private data: DataService) { }
+
+  ngOnChanges(): void {
+    this.data.setRepoData(this.searchResults);
   }
-
-  constructor() { }
-
 }

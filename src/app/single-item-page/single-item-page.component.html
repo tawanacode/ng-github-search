@@ -1,1 +1,31 @@
-<p>single-item-page works!</p>
+<div class="container">
+  <h1>{{ repoData.name }}</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-3 text-center">
+      <img [src]='repoData.owner.avatar_url' class="img-fluid rounded-circle" [alt]='repoData.owner.login'>
+    </div>
+  </div>
+  <div class="text-center">
+    <h2 class="card-title">Author: {{ repoData.owner.login }}</h2>
+    <p class="card-text">{{ repoData.description }}</p>
+    <h3 class="mx-3">
+      <a [href]='repoData.html_url' class="btn btn-outline-dark" target="_blank" rel="noopener">
+          <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true" ></fa-icon> view repo on github
+      </a>
+    </h3>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-sm-4 text-center">
+      <h2><strong> {{ repoData.stargazers_count }} </strong><br>
+        <small>Stargazers</small></h2>
+    </div>
+    <div class="col-md-4 col-sm-4 text-center">
+      <h2><strong>{{ repoData.forks_count }} </strong><br>
+        <small>Forks</small></h2>
+    </div>
+    <div class="col-md-4 col-sm-4 text-center">
+      <h2><strong>{{ repoData.open_issues }}</strong><br>
+        <small>Open Issues</small></h2>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, tap, map, switchMap} from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, tap, map, switchMap } from 'rxjs/operators';
 
 import { DataService } from '../data.service';
 
@@ -12,13 +12,14 @@ import { DataService } from '../data.service';
 })
 
 export class SearchFormComponent implements OnInit {
-
+  pageTitle = 'Github Search';
   model: any;
   searching: boolean = false;
   searchFailed: boolean = false;
+  showResults: boolean = false;
   githubData: any[];
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
   }
@@ -40,4 +41,10 @@ export class SearchFormComponent implements OnInit {
       ),
       tap(() => this.searching = false)
     );
+
+  onEnter() {
+    if (!this.searchFailed) {
+      return this.showResults = true;
+    }
+  }
 }
