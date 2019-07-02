@@ -1,9 +1,12 @@
+<div class="container">
+<form>
 <div class="form-group">
-  <label for="typeahead-http">Search for a wiki page:</label>
-  <input id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="Wikipedia search" />
+  <label for="typeahead-http">Search for a github repo:</label>
+  <input id="typeahead-http" name="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="github search">
   <span *ngIf="searching">searching...</span>
   <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
 </div>
+</form>
+</div>
 
-<hr>
-<pre>Model: {{ model | json }}</pre>
+<app-search-results *ngIf='!searchFailed' [searchResults]='githubData'></app-search-results>

@@ -1,1 +1,7 @@
-<p>search-results works!</p>
+<div class="card my-3" *ngFor='let data of searchResults'>
+    <div class="card-body">
+      <h3>{{ data?.name }}</h3>
+      <p>{{ data?.description }}</p>
+      <img [src]='data.owner.avatar_url' class="img-fluid rounded-circle w-25 float-left" [alt]='data.owner.login'>
+    </div>
+  </div>

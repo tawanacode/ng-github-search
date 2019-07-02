@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, tap, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, tap, map, switchMap} from 'rxjs/operators';
 
 import { DataService } from '../data.service';
-import { IData } from '../data';
 
 @Component({
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
-  providers: [DataService],
   styleUrls: ['./search-form.component.scss']
 })
 
 export class SearchFormComponent implements OnInit {
+
   model: any;
-  searching = false;
-  searchFailed = false;
-  githubData: IData[];
+  searching: boolean = false;
+  searchFailed: boolean = false;
+  githubData: any[];
 
   constructor(private dataService: DataService) {}
 
@@ -26,11 +25,13 @@ export class SearchFormComponent implements OnInit {
 
   search = (text$: Observable<string>) =>
     text$.pipe(
-      debounceTime(300),
+      debounceTime(10),
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(term =>
         this.dataService.search(term).pipe(
+          tap(data => this.githubData = data),
+          map(data => data.map((d: { name: string; }) => d.name)),
           tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
@@ -38,6 +39,5 @@ export class SearchFormComponent implements OnInit {
           }))
       ),
       tap(() => this.searching = false)
-    )
-
+    );
 }
