@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from "../data.service";
 
 @Component({
@@ -10,18 +10,17 @@ import { DataService } from "../data.service";
 
 export class SingleItemPageComponent implements OnInit {
   repoData: any;
-  constructor(private route: ActivatedRoute, private data: DataService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private data: DataService) { }
 
   ngOnInit() {
-    let id = +this.route.snapshot.paramMap.get('id');
-    this.data.currentData.subscribe(data => {
-      this.repoData = this.filterById(data, id);
+    let name = this.route.snapshot.paramMap.get('name');
+    let repo = this.route.snapshot.paramMap.get('repo');
+    this.data.getRepo(name, repo).subscribe(data => {
+      this.repoData = data;
     })
   }
 
-  filterById(repos:any[], id:number){
-    return repos.filter(repo => {
-      if(repo.id === id) return repo;
-    }).pop();
+  onBack():void {
+    this.router.navigate(['/search-page']);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { IData } from './data';
@@ -8,18 +8,19 @@ import { IData } from './data';
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
-  private githubReposUrl: string = 'https://api.github.com/search/repositories';
-  private githubParams = new HttpParams();
 
-  private repoDataSubject = new BehaviorSubject([]);
-  currentData = this.repoDataSubject.asObservable();
+export class DataService {
+  private githubApiUrl: string = 'https://api.github.com';
+  private githubParams = new HttpParams();
 
   constructor(private http: HttpClient) {
   }
 
-  setRepoData(obj: any) {
-    this.repoDataSubject.next(obj)
+  getRepo(name: string, repo: string){
+    return this.http.get(`${this.githubApiUrl}/repos/${name}/${repo}`).pipe(
+      tap(data => console.log(`All: ${JSON.stringify(data)}`)),
+      catchError(this.handleError)
+    )
   }
 
   search(term: string) {
@@ -28,9 +29,8 @@ export class DataService {
     // Add safe, URL encoded search parameter if there is a search term
     const options = term ? { params: this.githubParams.set('q', term) } : {};
 
-    return this.http.get(this.githubReposUrl, options).pipe(
+    return this.http.get(`${this.githubApiUrl}/search/repositories`, options).pipe(
       map(response => response['items']),
-      //tap(data => console.log(`All: ${JSON.stringify(data)}`)),
       catchError(this.handleError)
     )
   }

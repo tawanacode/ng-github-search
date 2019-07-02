@@ -9,6 +9,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
@@ -36,6 +37,6 @@ import { SingleItemPageComponent } from './single-item-page/single-item-page.com
 })
 export class AppModule {
   constructor(){
-    library.add(faGithub);
+    library.add(faGithub, faSearch);
   }
 }
