@@ -83,7 +83,7 @@
         </ngb-tab>
         <ngb-tab title="Closed Issues">
           <ng-template ngbTabContent>
-            <div class="py-5" *ngFor='let data of closedIssues.items'>
+            <div *ngFor='let data of closedIssues.items'>
               <h3 class="pt-4">{{ data.title }}</h3>
               <p>{{ (data.body.length > 40) ? ( data.body | slice:0:90)+'...':( data.body)}}</p>
               <p class="pb-3">
