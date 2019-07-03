@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -32,6 +32,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     HttpClientModule,
     AppRoutingModule,
     NgbTypeaheadModule,
+    NgbTabsetModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
     ChartsModule

@@ -10,7 +10,9 @@ import { DataService } from "../data.service";
 
 export class SingleItemPageComponent implements OnInit {
   repoData: any;
-  closedIssues: number;
+  closedIssuesCount: number;
+  closedIssues:any;
+  openIssues:any;
 
   constructor(private route: ActivatedRoute, private router: Router, private data: DataService) { }
 
@@ -22,7 +24,15 @@ export class SingleItemPageComponent implements OnInit {
     })
 
     this.data.getRepoIssues(name, repo, 'closed').subscribe(
-      data => this.closedIssues = data.total_count)
+      data => {
+        this.closedIssuesCount = data.total_count;
+        this.closedIssues = data;
+      })
+
+      this.data.getRepoIssues(name, repo, 'open').subscribe(
+        data => {
+          this.openIssues = data;
+        })
   }
 
   onBack():void {
