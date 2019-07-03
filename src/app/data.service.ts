@@ -16,16 +16,20 @@ export class DataService {
   constructor(private http: HttpClient) {
   }
 
-  getRepo(name: string, repo: string){
-    return this.http.get(`${this.githubApiUrl}/repos/${name}/${repo}`).pipe(
-      tap(data => console.log(`All: ${JSON.stringify(data)}`)),
+  getRepo(name: string, repo: string): Observable<IData>{
+    return this.http.get<IData>(`${this.githubApiUrl}/repos/${name}/${repo}`).pipe(
       catchError(this.handleError)
     )
   }
 
-  search(term: string) {
-    term = term.trim();
+  getRepoIssues(name: string, repo: string, state: string): Observable<IData>{
+    return this.http.get<IData>(`${this.githubApiUrl}/search/issues?q=repo:${name}/${repo}+type:issue+state:${state}`).pipe(
+      catchError(this.handleError)
+    )
+  }
 
+  search(term: string): Observable<any> {
+    term = term.trim();
     // Add safe, URL encoded search parameter if there is a search term
     const options = term ? { params: this.githubParams.set('q', term) } : {};
 

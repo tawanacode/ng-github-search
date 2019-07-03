@@ -1,5 +1,4 @@
 import { Component, OnChanges, Input } from '@angular/core';
-import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-search-results',
@@ -9,7 +8,7 @@ import { DataService } from '../data.service';
 export class SearchResultsComponent implements OnChanges {
   @Input() searchResults: any [];
 
-  constructor(private data: DataService) { }
+  constructor() { }
 
   ngOnChanges(): void {
     console.log(this.searchResults);

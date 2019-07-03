@@ -1,8 +1,8 @@
 <main *ngIf='repoData'>
-  <nav class="navbar navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-light fixed-top p-3">
     <a class="navbar-brand" [routerLink]="['/search-page']">
-        <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true"></fa-icon>
-        Github Search App
+      <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true"></fa-icon>
+      Github Search App
     </a>
     <button class="btn btn-outline-dark" (click)='onBack()'>
       <fa-icon [icon]="['fas', 'search']" [fixedWidth]="true"></fa-icon>
@@ -17,10 +17,10 @@
           <img [src]='repoData.owner.avatar_url' class="img-fluid rounded-circle" [alt]='repoData.owner.login'>
         </div>
       </div>
-      <div class="text-center mt-3 mb-5">
+      <div class="text-center my-5">
         <h1 class="card-title">
-            {{ repoData.name }}</h1>
-            <p><strong>Repo by {{ repoData.owner.login }}</strong></p>
+          {{ repoData.name }}</h1>
+        <p><strong>Repo by {{ repoData.owner.login }}</strong></p>
         <p class="card-text">{{ repoData.description }}</p>
         <div class="mx-3">
           <a [href]='repoData.html_url' class="btn btn-outline-dark" target="_blank" rel="noopener">
@@ -28,7 +28,7 @@
           </a>
         </div>
       </div>
-      <div class="row">
+      <div class="row  justify-content-center">
         <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
           <h2><strong> {{ repoData.stargazers_count }} </strong><br>
             <small>Stargazers</small></h2>
@@ -38,17 +38,28 @@
             <small>Forks</small></h2>
         </div>
         <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
-          <h2><strong>{{ repoData.open_issues }}</strong><br>
-            <small>Open Issues</small></h2>
-        </div>
-        <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
           <h2><strong>{{ repoData.subscribers_count }}</strong><br>
             <small>Subscribers</small></h2>
         </div>
       </div>
+      <div class="row  justify-content-center">
+        <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
+          <h2><strong>{{ repoData.open_issues }}</strong><br>
+            <small>Open Issues</small></h2>
+        </div>
+        <div class="col-md-3 col-sm-4 col-6 text-center mb-4">
+          <h2><strong>{{ closedIssues }}</strong><br>
+            <small>Closed Issues</small></h2>
+        </div>
+      </div>
     </div>
   </section>
-  <section>
-      <app-pie-chart></app-pie-chart>
+  <section class="py-5 mt-5" *ngIf='closedIssues'>
+    <div class="row justify-content-center">
+      <div class="col-7 text-center">
+          <h2 class="pb-3">{{ repoData.name }} Open and Resolved Issues</h2>
+        <app-pie-chart [closedIssues]='closedIssues' [openIssues]='repoData.open_issues'></app-pie-chart>
+      </div>
+    </div>
   </section>
 </main>
