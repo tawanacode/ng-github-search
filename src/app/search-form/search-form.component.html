@@ -2,12 +2,13 @@
   <div class="text-center mt-4">
     <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true" size="6x"></fa-icon>
     <h1> {{ pageTitle }}</h1>
+    <p>Search for a repository by name</p>
   </div>
   <form #form="ngForm">
     <div class="form-group my-5">
       <label class="sr-only" for="typeahead-http">Search for a github repo:</label>
       <input id="typeahead-http" name="typeahead-http" type="text" class="form-control"
-        [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="github search"
+        [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="start typing then hit enter..."
         (keydown.enter)="onEnter()">
       <span *ngIf="searching">searching...</span>
       <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ChartType, ChartOptions } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-pie-chart',
