@@ -1,15 +1,18 @@
-<div class="card my-3" *ngFor='let data of searchResults'>
-  <div class="card-body">
-    <div class="card-image">
-      <img [src]='data.owner.avatar_url' class="img-fluid rounded-circle" [alt]='data.owner.login'>
+<section *ngIf="searchResults.length > 0">
+    <h2 class="mb-4">Search Results</h2>
+    <div class="card my-3" *ngFor='let data of searchResults'>
+      <div class="card-body">
+        <div class="card-image">
+          <img [src]='data.owner.avatar_url' class="img-fluid rounded-circle" [alt]='data.owner.login'>
+        </div>
+        <div class="card-details mx-3">
+          <h3>{{ data.name }}</h3>
+          <p *ngIf="data.description">
+            {{ ( data.description.length > 20) ? ( data.description | slice:0:90)+'...':( data.description)}}</p>
+        </div>
+        <div class="card-btn">
+          <a [routerLink]="['/search-page', data.owner.login, data.name]" class="btn btn-dark">more&nbsp;info</a>
+        </div>
+      </div>
     </div>
-    <div class="card-details mx-3">
-      <h3>{{ data.name }}</h3>
-      <p *ngIf="data.description">
-        {{ ( data.description.length > 20) ? ( data.description | slice:0:90)+'...':( data.description)}}</p>
-    </div>
-    <div class="card-btn">
-      <a [routerLink]="['/search-page', data.owner.login, data.name]" class="btn btn-dark">more&nbsp;info</a>
-    </div>
-  </div>
-</div>
+</section>

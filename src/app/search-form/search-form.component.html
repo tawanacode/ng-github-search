@@ -10,8 +10,11 @@
       <input id="typeahead-http" name="typeahead-http" type="text" class="form-control"
         [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="start typing then hit enter..."
         (keydown.enter)="onEnter()">
-      <span *ngIf="searching">searching...</span>
-      <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+      <p class="text-center mt-3" *ngIf="searching">
+          <fa-icon [icon]="['fas', 'spinner']" [spin]="true" [fixedWidth]="true"></fa-icon>
+          searching...
+      </p>
+      <div class="invalid-feedback text-center mt-3" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
     </div>
   </form>
   <app-search-results *ngIf='showResults' [searchResults]='githubData'></app-search-results>
