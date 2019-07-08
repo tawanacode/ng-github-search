@@ -24,7 +24,6 @@ export class DataService {
 
   getRepoIssues(name: string, repo: string, state: string): Observable<IData>{
     return this.http.get<IData>(`${this.githubApiUrl}/search/issues?q=repo:${name}/${repo}+type:issue+state:${state}`).pipe(
-      tap(data => console.log(data)),
       catchError(this.handleError)
     )
   }

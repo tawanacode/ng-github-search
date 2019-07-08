@@ -11,6 +11,5 @@ export class SearchResultsComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(): void {
-    console.log(this.searchResults);
   }
 }
