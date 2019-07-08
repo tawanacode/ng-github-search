@@ -10,7 +10,6 @@ import { DataService } from "../data.service";
 
 export class SingleItemPageComponent implements OnInit {
   repoData: any;
-  closedIssuesCount: number;
   closedIssues:any;
   openIssues:any;
 
@@ -25,7 +24,6 @@ export class SingleItemPageComponent implements OnInit {
 
     this.data.getRepoIssues(name, repo, 'closed').subscribe(
       data => {
-        this.closedIssuesCount = data.total_count;
         this.closedIssues = data;
       })
 
