@@ -6,79 +6,83 @@
     </a>
     <button class="btn btn-outline-light" (click)='onBack()'>
       <fa-icon [icon]="['fas', 'search']" [fixedWidth]="true"></fa-icon>
-      <span class="">search page</span>
+      <span class="d-none d-sm-inline">search page</span>
     </button>
   </nav>
 
-  <section class="p-5 mt-5">
-    <div class="container text-center text-md-left">
-    <div class="row justify-content-center bg-white align-items-center shadow mt-5 px-2 py-4">
-      <div class="col-md-3 col-lg-2 text-center">
-        <img [src]='repoData.owner.avatar_url' class="img-fluid rounded-circle" [alt]='repoData.owner.login'>
-      </div>
-      <div class="col-md-9 col-lg-10">
-        <div class="d-md-flex align-items-center">
-          <div class="">
-            <h1 class="card-title">
-              {{ repoData.name }} <small>by {{ repoData.owner.login }}</small>
-            </h1>
-          </div>
-          <div class="ml-auto mr-3">
-            <p>
-              <a [href]='repoData.html_url' class="btn btn-dark" target="_blank" rel="noopener">
-                <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true"></fa-icon> view on github
-              </a>
-            </p>
-          </div>
+  <section class="px-5 pt-5 pb-3 mt-5">
+    <div class="container text-center text-md-left bg-white shadow">
+      <div class="row justify-content-center align-items-center mt-5 px-2 py-4">
+        <div class="col-5 col-md-3 col-lg-2 text-center pb-4 pb-sm-0">
+          <img [src]='repoData.owner.avatar_url' class="img-fluid rounded-circle" [alt]='repoData.owner.login'>
         </div>
-        <hr>
-        <p class="card-text">{{ repoData.description }}</p>
+        <div class="col-md-9 col-lg-10">
+          <div class="d-md-flex align-items-center pb-2 pb-sm-0">
+            <div class="pb-3 pb-sm-0">
+              <h1 class="card-title">
+                {{ repoData.name }} <br><small>by {{ repoData.owner.login }}</small>
+              </h1>
+            </div>
+            <div class="ml-auto mr-3">
+              <p>
+                <a [href]='repoData.html_url' class="btn btn-dark" target="_blank" rel="noopener">
+                  <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true"></fa-icon> view on github
+                </a>
+              </p>
+            </div>
+          </div>
+          <hr>
+          <p class="card-text">{{ repoData.description }}</p>
+        </div>
       </div>
     </div>
-  </div>
   </section>
   <section class="px-5 mb-5">
-  <div class="container px-5 pt-4 pb-0 d-flex flex-wrap align-items-center justify-content-between text-center bg-white shadow">
-    <div class="stats mb-4">
-      <h4><strong> {{ repoData.stargazers_count }} </strong><br>
-        <small>Stargazers</small></h4>
-    </div>
-    <div class="stats mb-4">
-      <h4><strong>{{ repoData.forks_count }} </strong><br>
-        <small>Forks</small></h4>
-    </div>
-    <div class="stats mb-4">
-      <h4><strong>{{ repoData.subscribers_count }}</strong><br>
-        <small>Subscribers</small></h4>
-    </div>
-    <div class="stats mb-4">
-      <h4><strong>{{ openIssues.total_count }}</strong><br>
-        <small>Open Issues</small></h4>
-    </div>
-    <div class="stats mb-4">
-      <h4><strong>{{ closedIssues.total_count }}</strong><br>
-        <small>Closed Issues</small></h4>
-    </div>
+    <div class="container px-5 pt-5 pb-0 text-center bg-white shadow">
+      <div class="row flex-wrap align-items-center justify-content-center justify-content-lg-around">
+        <div class="col-6 col-sm-4 col-lg-2 mb-5">
+          <h4><strong> {{ repoData.stargazers_count }} </strong><br>
+            <small>Stargazers</small></h4>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-2 mb-5">
+          <h4><strong>{{ repoData.forks_count }} </strong><br>
+            <small>Forks</small></h4>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-2 mb-5">
+          <h4><strong>{{ repoData.subscribers_count }}</strong><br>
+            <small>Subscribers</small></h4>
+        </div>
+        <div class="col-6 col-sm-6 col-lg-2 mb-5">
+          <h4><strong>{{ repoData.open_issues }}</strong><br>
+            <small>Open Issues</small></h4>
+        </div>
+        <div class="col-6 col-sm-6 col-lg-2 mb-5">
+          <h4><strong>{{ closedIssues?.total_count }}</strong><br>
+            <small>Closed Issues</small></h4>
+        </div>
+      </div>
     </div>
   </section>
   <section class="mb-5" *ngIf='closedIssues.total_count || repoData.open_issues'>
     <div class="px-5">
       <div class="container shadow p-5 bg-white">
+        <h2 class="pb-4">Issues</h2>
         <ngb-tabset>
-          <ngb-tab title="All Issues">
+          <ngb-tab title="All">
             <ng-template ngbTabContent>
-              <h2 class="pb-4 pt-5 text-center">All Issues chart</h2>
+              <h3 class="pb-4 pt-5 text-center">Chart</h3>
               <app-pie-chart [closedIssues]='closedIssues.total_count' [openIssues]='repoData.open_issues'>
               </app-pie-chart>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Open Issues" *ngIf="repoData.open_issues">
+          <ngb-tab title="Open" *ngIf="repoData.open_issues">
             <ng-template ngbTabContent>
-              <h2 class="pt-5">Open Issues</h2>
-              <p class="pb-4">Showing the first {{ repoData.open_issues > 29 ? '30' : repoData.open_issues }} of {{ repoData.open_issues }} open issues. View the rest on github.</p>
+              <h3 class="pt-5">Open Issues</h3>
+              <p class="pb-4">Showing the first {{ repoData.open_issues > 29 ? '30' : repoData.open_issues }} of
+                {{ repoData.open_issues }} open issues.</p>
               <div *ngFor='let data of openIssues.items'>
                 <hr class="pb-4 pt-4">
-                <h3>{{ data.title }}</h3>
+                <h4>{{ data.title }}</h4>
                 <p>{{ (data.body.length > 100) ? ( data.body | slice:0:200)+'...':( data.body)}}</p>
                 <p>
                   <a [href]='data.html_url' target="_blank" rel="noopener">
@@ -88,13 +92,14 @@
               </div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab title="Closed Issues" *ngIf="closedIssues.total_count">
+          <ngb-tab title="Closed" *ngIf="closedIssues.total_count">
             <ng-template ngbTabContent>
-              <h2 class="pt-5">Closed Issues</h2>
-              <p class="pb-4">Showing the first {{ (closedIssues.total_count > 29) ? '30' : closedIssues.total_count }} of {{ closedIssues.total_count }} closed issues. View the rest on github.</p>
+              <h3 class="pt-5">Closed Issues</h3>
+              <p class="pb-4">Showing the first {{ (closedIssues.total_count > 29) ? '30' : closedIssues.total_count }}
+                of {{ closedIssues.total_count }} closed issues.</p>
               <div *ngFor='let data of closedIssues.items'>
                 <hr>
-                <h3 class="pt-4">{{ data.title }}</h3>
+                <h4 class="pt-4">{{ data.title }}</h4>
                 <p>{{ (data.body.length > 40) ? ( data.body | slice:0:90)+'...':( data.body)}}</p>
                 <p class="pb-3">
                   <a [href]='data.html_url' target="_blank" rel="noopener">
