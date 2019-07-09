@@ -1,14 +1,16 @@
-<main *ngIf='repoData'>
-  <nav class="navbar navbar-light bg-dark px-3 px-sm-5 py-4 fixed-top">
-    <a class="navbar-brand text-light d-none d-sm-inline" [routerLink]="['/search-page']">
-      <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true" [inverse]="true"></fa-icon>
-      Github Search App
-    </a>
-    <button class="btn btn-outline-light" (click)='onBack()'>
-      <fa-icon [icon]="['fas', 'search']" [fixedWidth]="true"></fa-icon>
-      <span class="d-none d-sm-inline">search page</span>
-    </button>
-  </nav>
+<div *ngIf='repoData'>
+  <header>
+    <nav class="navbar navbar-light bg-dark px-3 px-sm-5 py-4 fixed-top">
+      <a class="navbar-brand text-light d-none d-sm-inline" [routerLink]="['/search-page']">
+        <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true" [inverse]="true"></fa-icon>
+        Github Search App
+      </a>
+      <button class="btn btn-outline-light" (click)='onBack()'>
+        <fa-icon [icon]="['fas', 'search']" [fixedWidth]="true"></fa-icon>
+        <span class="d-none d-sm-inline">search page</span>
+      </button>
+    </nav>
+  </header>
 
   <section class="px-3 px-sm-5 pt-3 pt-sm-5 pb-3 mt-5">
     <div class="container text-center text-md-left bg-white shadow">
@@ -38,7 +40,7 @@
     </div>
   </section>
   <section class="px-3 px-sm-5 mb-5">
-    <div class="container px-4 px-sm-5 pt-4 pt-sm-5 pb-0 text-center bg-white shadow">
+    <div class="container px-4 px-sm-5 pt-5 pt-sm-5 pb-0 text-center bg-white shadow">
       <div class="row flex-wrap align-items-center justify-content-center justify-content-lg-around">
         <div class="col-6 col-sm-4 col-lg-2 mb-5">
           <h4><strong> {{ repoData.stargazers_count }} </strong><br>
@@ -52,29 +54,29 @@
           <h4><strong>{{ repoData.subscribers_count }}</strong><br>
             <small>Subscribers</small></h4>
         </div>
-        <div class="col-6 col-sm-6 col-lg-2 mb-3 mb-sm-5">
+        <div class="col-6 col-sm-6 col-lg-2 mb-5">
           <h4><strong>{{ repoData.open_issues }}</strong><br>
             <small>Open Issues</small></h4>
         </div>
-        <div class="col-6 col-sm-6 col-lg-2 mb-3 mb-sm-5">
-          <h4><strong>{{ closedIssues?.total_count }}</strong><br>
+        <div class="col-6 col-sm-6 col-lg-2 mb-5" *ngIf="closedIssues">
+          <h4><strong>{{ closedIssues.total_count }}</strong><br>
             <small>Closed Issues</small></h4>
         </div>
       </div>
     </div>
   </section>
-  <section class="p-3 p-sm-5 mb-3 mb-sm-5" *ngIf='closedIssues.total_count || repoData.open_issues'>
+  <section class="p-3 p-sm-5 mb-3 mb-sm-5" *ngIf='closedIssues || repoData.open_issues > 0'>
     <div class="container p-4 p-sm-5 shadow bg-white">
       <h2 class="pb-4">Issues</h2>
       <ngb-tabset>
         <ngb-tab title="All">
           <ng-template ngbTabContent>
             <h3 class="pb-4 pt-5 text-center">Chart</h3>
-            <app-pie-chart [closedIssues]='closedIssues.total_count' [openIssues]='repoData.open_issues'>
+            <app-pie-chart *ngIf="closedIssues" [closedIssues]='closedIssues.total_count' [openIssues]='repoData.open_issues'>
             </app-pie-chart>
           </ng-template>
         </ngb-tab>
-        <ngb-tab title="Open" *ngIf="repoData.open_issues">
+        <ngb-tab title="Open" *ngIf="repoData.open_issues > 0">
           <ng-template ngbTabContent>
             <h3 class="pt-5">Open Issues</h3>
             <p class="pb-4">Showing the first {{ repoData.open_issues > 29 ? '30' : repoData.open_issues }} of
@@ -91,7 +93,7 @@
             </div>
           </ng-template>
         </ngb-tab>
-        <ngb-tab title="Closed" *ngIf="closedIssues.total_count">
+        <ngb-tab title="Closed" *ngIf="closedIssues">
           <ng-template ngbTabContent>
             <h3 class="pt-5">Closed Issues</h3>
             <p class="pb-4">Showing the first {{ (closedIssues.total_count > 29) ? '30' : closedIssues.total_count }}
@@ -111,4 +113,4 @@
       </ngb-tabset>
     </div>
   </section>
-</main>
+</div>

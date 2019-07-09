@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from "../data.service";
 
+import { IData } from '../data';
+
 @Component({
   selector: 'app-single-item-page',
   templateUrl: './single-item-page.component.html',
@@ -10,8 +12,8 @@ import { DataService } from "../data.service";
 
 export class SingleItemPageComponent implements OnInit {
   repoData: any;
-  closedIssues:any;
-  openIssues:any;
+  closedIssues: IData;
+  openIssues: IData;
 
   constructor(private route: ActivatedRoute, private router: Router, private data: DataService) { }
 
