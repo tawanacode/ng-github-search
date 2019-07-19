@@ -36,6 +36,6 @@ export class SingleItemPageComponent implements OnInit {
   }
 
   onBack():void {
-    this.router.navigate(['/search-page']);
+    this.router.navigate(['/results']);
   }
 }

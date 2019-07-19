@@ -9,7 +9,7 @@ import { NgbTypeaheadModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSpinner, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { ChartsModule } from 'ng2-charts';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,8 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SingleItemPageComponent } from './single-item-page/single-item-page.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { HomeComponent } from './home/home.component';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     SearchFormComponent,
     SearchResultsComponent,
     SingleItemPageComponent,
-    PieChartComponent
+    PieChartComponent,
+    HomeComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,6 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 })
 export class AppModule {
   constructor(){
-    library.add(faGithub, faSearch, faSpinner);
+    library.add(faGithub, faSearch, faSpinner, faArrowLeft);
   }
 }

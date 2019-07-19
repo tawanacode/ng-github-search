@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { IData } from './data';
@@ -12,7 +12,7 @@ import { IData } from './data';
 export class DataService {
   private githubApiUrl: string = 'https://api.github.com';
   private githubParams = new HttpParams();
-
+  private searchResults = new BehaviorSubject(null);
   constructor(private http: HttpClient) {
   }
 
@@ -28,6 +28,10 @@ export class DataService {
     )
   }
 
+  getSearchResults(){
+    return this.searchResults.asObservable();
+  }
+
   search(term: string): Observable<any> {
     term = term.trim();
     // Add safe, URL encoded search parameter if there is a search term
@@ -35,6 +39,7 @@ export class DataService {
 
     return this.http.get(`${this.githubApiUrl}/search/repositories`, options).pipe(
       map(response => response['items']),
+      tap(data => this.searchResults.next(data)),
       catchError(this.handleError)
     )
   }

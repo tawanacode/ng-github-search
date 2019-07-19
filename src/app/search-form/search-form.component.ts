@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, tap, map, switchMap } from 'rxjs/operators';
@@ -11,17 +12,15 @@ import { DataService } from '../data.service';
   styleUrls: ['./search-form.component.scss']
 })
 
-export class SearchFormComponent implements OnInit {
-  pageTitle = 'Github Search';
+export class SearchFormComponent implements OnChanges {
   model: any;
   searching: boolean = false;
   searchFailed: boolean = false;
   showResults: boolean = false;
-  githubData: any[];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnChanges(): void {
   }
 
   search = (text$: Observable<string>) =>
@@ -31,7 +30,6 @@ export class SearchFormComponent implements OnInit {
       tap(() => this.searching = true),
       switchMap(term =>
         this.dataService.search(term).pipe(
-          tap(data => this.githubData = data),
           map(data => data.map((d: { name: string; }) => d.name)),
           tap(() => this.searchFailed = false),
           catchError(() => {
@@ -42,9 +40,10 @@ export class SearchFormComponent implements OnInit {
       tap(() => this.searching = false)
     );
 
-  onEnter() {
+  onEnter(): void {
     if (!this.searchFailed) {
-      return this.showResults = true;
+       this.showResults = true;
+       this.router.navigate(['/results']);
     }
   }
 }

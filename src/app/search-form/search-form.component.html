@@ -1,21 +1,13 @@
-<div class="container">
-  <div class="text-center mt-4">
-    <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true" size="6x"></fa-icon>
-    <h1> {{ pageTitle }}</h1>
-    <p>Search for a repository by name</p>
+<form #form="ngForm">
+  <div class="form-group my-5">
+    <label class="sr-only" for="typeahead-http">Search for a github repo:</label>
+    <input id="typeahead-http" name="typeahead-http" type="text" class="form-control bg-white shadow border-0"
+      [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search"
+      placeholder="start typing then hit enter..." (keydown.enter)="onEnter()">
+    <p class="text-center mt-3" *ngIf="searching">
+      <fa-icon [icon]="['fas', 'spinner']" [spin]="true" [fixedWidth]="true"></fa-icon>
+      searching...
+    </p>
+    <div class="invalid-feedback text-center mt-3" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
   </div>
-  <form #form="ngForm">
-    <div class="form-group my-5">
-      <label class="sr-only" for="typeahead-http">Search for a github repo:</label>
-      <input id="typeahead-http" name="typeahead-http" type="text" class="form-control bg-white shadow border-0"
-        [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="start typing then hit enter..."
-        (keydown.enter)="onEnter()">
-      <p class="text-center mt-3" *ngIf="searching">
-          <fa-icon [icon]="['fas', 'spinner']" [spin]="true" [fixedWidth]="true"></fa-icon>
-          searching...
-      </p>
-      <div class="invalid-feedback text-center mt-3" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
-    </div>
-  </form>
-  <app-search-results *ngIf='showResults' [searchResults]='githubData'></app-search-results>
-</div>
+</form>

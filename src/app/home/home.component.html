@@ -1,0 +1,10 @@
+<main class="d-flex align-items-center">
+  <div class="container">
+    <div class="text-center mt-4">
+      <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true" size="6x"></fa-icon>
+      <h1> {{ pageTitle }}</h1>
+      <p>Search for a repository by name</p>
+    </div>
+    <app-search-form (keydown.enter)="onKeyDown()"></app-search-form>
+  </div>
+</main>

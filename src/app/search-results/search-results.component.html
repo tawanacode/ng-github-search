@@ -12,7 +12,7 @@
             {{ ( data.description.length > 20) ? ( data.description | slice:0:90)+'...':( data.description)}}</p>
         </div>
         <div class="card-btn ml-auto">
-          <a [routerLink]="['/search-page', data.owner.login, data.name]" class="btn btn-dark">more&nbsp;info</a>
+          <a [routerLink]="['/results', data.owner.login, data.name]" class="btn btn-dark">more&nbsp;info</a>
         </div>
       </div>
     </div>

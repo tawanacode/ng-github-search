@@ -1,0 +1,7 @@
+<div class="container">
+    <a class="text-center text-dark d-none d-sm-block mt-3" [routerLink]="['/home']">
+      <fa-icon [icon]="['fab', 'github']" [fixedWidth]="true" size="6x"></fa-icon>
+    </a>
+  <app-search-form></app-search-form>
+  <app-search-results *ngIf='results' [searchResults]='results'></app-search-results>
+</div>
