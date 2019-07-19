@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SingleItemPageGuard implements CanActivate {
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      let id = +next.url[1].path;
-      if(!isNaN(id)){
-        this.router.navigate(['/search-page']);
-      }
+    const id = +next.url[1].path;
+    if (!isNaN(id)) {
+      this.router.navigate(['/search-page']);
+    }
     return true;
   }
 

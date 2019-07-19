@@ -45,7 +45,7 @@ import { ResultsComponent } from './results/results.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(){
+  constructor() {
     library.add(faGithub, faSearch, faSpinner, faArrowLeft);
   }
 }

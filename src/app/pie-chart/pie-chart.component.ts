@@ -14,14 +14,14 @@ export class PieChartComponent implements OnChanges {
     responsive: true,
   };
   public pieChartLabels = ['open issues', 'closed issues'];
-  public pieChartData;
+  public pieChartData: any;
   public pieChartType = 'pie';
   public pieChartLegend = true;
 
   constructor() {
   }
 
-  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-    this.pieChartData = [this.openIssues,this.closedIssues];
+  ngOnChanges(): void {
+    this.pieChartData = [this.openIssues, this.closedIssues];
   }
 }

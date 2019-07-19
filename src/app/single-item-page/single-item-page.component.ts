@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from "../data.service";
+import { DataService } from '../data.service';
 
 import { IData } from '../data';
 
@@ -18,24 +18,25 @@ export class SingleItemPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private data: DataService) { }
 
   ngOnInit() {
-    let name = this.route.snapshot.paramMap.get('name');
-    let repo = this.route.snapshot.paramMap.get('repo');
+    const name = this.route.snapshot.paramMap.get('name');
+    const repo = this.route.snapshot.paramMap.get('repo');
+
     this.data.getRepo(name, repo).subscribe(data => {
       this.repoData = data;
-    })
+    });
 
     this.data.getRepoIssues(name, repo, 'closed').subscribe(
       data => {
         this.closedIssues = data;
-      })
+      });
 
-      this.data.getRepoIssues(name, repo, 'open').subscribe(
-        data => {
-          this.openIssues = data;
-        })
+    this.data.getRepoIssues(name, repo, 'open').subscribe(
+      data => {
+        this.openIssues = data;
+      });
   }
 
-  onBack():void {
+  onBack(): void {
     this.router.navigate(['/results']);
   }
 }

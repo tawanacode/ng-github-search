@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';import { SingleItemPageComponent } from './single-item-page/single-item-page.component';
+import { Routes, RouterModule } from '@angular/router';
+import { SingleItemPageComponent } from './single-item-page/single-item-page.component';
 import { HomeComponent } from './home/home.component';
 import { SingleItemPageGuard } from './single-item-page/single-item-page.guard';
 import { ResultsComponent } from './results/results.component';

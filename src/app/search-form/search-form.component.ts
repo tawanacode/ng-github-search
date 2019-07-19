@@ -14,9 +14,9 @@ import { DataService } from '../data.service';
 
 export class SearchFormComponent implements OnChanges {
   model: any;
-  searching: boolean = false;
-  searchFailed: boolean = false;
-  showResults: boolean = false;
+  searching = false;
+  searchFailed = false;
+  showResults = false;
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -38,7 +38,7 @@ export class SearchFormComponent implements OnChanges {
           }))
       ),
       tap(() => this.searching = false)
-    );
+    )
 
   onEnter(): void {
     if (!this.searchFailed) {
