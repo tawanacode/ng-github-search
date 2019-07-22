@@ -38,7 +38,7 @@ export class DataService {
     const options = term ? { params: this.githubParams.set('q', term) } : {};
 
     return this.http.get<IData[]>(`${this.githubApiUrl}/search/repositories`, options).pipe(
-      map(response => response.map(e => e.items)),
+      map(response => response),
       tap(data => this.searchResults.next(data)),
       catchError(this.handleError)
     );

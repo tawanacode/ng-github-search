@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { IData } from '../data';
 
 @Component({
   selector: 'app-results',
@@ -8,11 +7,11 @@ import { IData } from '../data';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-  results: IData[];
+  results: any[];
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.getSearchResults().subscribe(data => this.results = data);
+    this.dataService.getSearchResults().subscribe(data => this.results = data ? data.items : []);
   }
 
 }

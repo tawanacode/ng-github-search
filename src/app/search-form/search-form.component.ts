@@ -30,7 +30,7 @@ export class SearchFormComponent implements OnChanges {
       tap(() => this.searching = true),
       switchMap(term =>
         this.dataService.search(term).pipe(
-          map(data => data.map((d: { name: string; }) => d.name)),
+          map(data => data.items.map((d: { name: string; }) => d.name)),
           tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
